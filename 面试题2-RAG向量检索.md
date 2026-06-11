@@ -713,4 +713,4 @@ List<Document> deduped = deduplicate(all);
 |---|---|---|---|
 | **HyDE** | 简单、效果稳 | 多 1 次 LLM 调用 | **短问题** |
 | **Multi-Query** | 召回率高 | 多 5 次 LLM 调用 | **模糊问题** |
-| **Step-Back** | 抽...[truncated]
+| **Step-Back** | 抽象问题后召回更准 | 多 1 次 LLM 调用 | **复杂/专业问题** |

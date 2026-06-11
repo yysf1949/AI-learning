@@ -718,4 +718,4 @@ C ──┘
 **加分项**：
 - 提到 **Spring AI 1.0 GA 是 2025-05-20**——生产稳定
 - 提到 **LangChain4j 老牌、Spring AI 新锐**——但 2026 年 Spring AI 主流
-- 提到 **Dify 适合 P...**[truncated]
+- 提到 **Dify 适合 PM/业务人员做 PoC、LangChain4j 适合 Java 团队做生产、Spring AI 是 Java 团队首选**——按角色选型
