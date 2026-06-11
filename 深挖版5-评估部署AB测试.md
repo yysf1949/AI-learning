@@ -1191,7 +1191,7 @@ public class TracedChatService {
 
             // 2. LLM 调用 Span
             Span llmSpan = tracer.spanBuilder("llm.call")
-                .setAttribute("model", "deepseek-chat")
+                .setAttribute("model", "deepseek-v4-flash")
                 .startSpan();
             String response = chatClient.prompt()
                 .user(message + "\n\nContext: " + formatDocs(docs))
@@ -1222,7 +1222,7 @@ POST /api/agent/chat (1.8s)
 │   └── vector.search (200ms, topK=5)
 ├── llm.call (1.5s)
 │   ├── tokenize (5ms)
-│   ├── api.request (1.4s, deepseek-chat)
+│   ├── api.request (1.4s, deepseek-v4-flash)
 │   └── tokenize (95ms)
 └── cache.write (5ms, hit=false)
 ```

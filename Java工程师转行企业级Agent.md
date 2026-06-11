@@ -139,7 +139,7 @@
 
 你需要至少 2 个模型的 API Key：
 - **国产**（国内直连快）：推荐 **DeepSeek**（性价比之王，2026 年企业首选）或者 **通义千问 Qwen3**（阿里云百炼平台）
-- **海外**（能力强、文档全）：**OpenAI GPT-4o** 或 **Anthropic Claude Sonnet 4.5**
+- **海外**（能力强、文档全）：**OpenAI GPT-5.5** 或 **Anthropic Claude Sonnet 4.6**
 
 **国产注册**：
 - DeepSeek：https://platform.deepseek.com/ → 注册 → 充值 10 块（够用半年）→ 创建 API Key
@@ -225,7 +225,7 @@ public class HelloLLM {
         message.put("content", "用一句话解释什么是 Agent");
         
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("model", "deepseek-chat");
+        requestBody.put("model", "deepseek-v4-flash");
         requestBody.put("messages", List.of(message));
         requestBody.put("temperature", 0.7);
         
@@ -287,7 +287,7 @@ public class HelloStreaming {
         );
         
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("model", "deepseek-chat");
+        requestBody.put("model", "deepseek-v4-flash");
         requestBody.put("messages", List.of(message));
         requestBody.put("stream", true);  // ← 关键：开流式
         
@@ -1891,9 +1891,9 @@ public class SalesAnalysisWorkflow {
 
 ### Q4：国产大模型怎么选？
 **A**: 2026 年 6 月的企业级 Agent 推荐组合：
-- **主力推理**：DeepSeek-V3 / R1（性价比之王，长文本好）
+- **主力推理**：DeepSeek V4（性价比之王，1M 上下文）
 - **复杂任务**：Qwen3-235B（阿里云百炼，工具调用强）
-- **超长上下文**：Kimi（月之暗面，200K 上下文，PDF 解析强）
+- **超长上下文**：Kimi K2（月之暗面，256K 上下文，PDF 解析强）
 - **轻量便宜**：GLM-4-Flash（智谱，0.0001 元/千 token，分类、提取类任务）
 - **私有化部署**：Qwen2.5 / DeepSeek（开源，可本地跑）
 

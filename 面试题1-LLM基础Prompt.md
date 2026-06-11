@@ -97,8 +97,8 @@ GPT-4o Token 化（tiktoken）：
 ```
 
 **为什么 LLM 工程师要懂 Token？**
-1. **计费**——按 token 收费（DeepSeek V3.2: ¥1/M input，GPT-5.4: $2.5/M input）
-2. **上下文窗口**——每个模型有最大 token 限制（DeepSeek V4: 128K，GPT-5.4: 128K，Claude Opus 4.6: 200K）
+1. **计费**——按 token 收费（DeepSeek V4: ¥1/M input 量级，GPT-5.4: $2.5/M input）
+2. **上下文窗口**——每个模型有最大 token 限制（DeepSeek V4: 1M，GPT-5.4: 1M，Claude Opus 4.8: 1M）
 3. **性能**——长文本更慢、更贵
 
 **加分项**：
@@ -127,16 +127,21 @@ int count = estimator.estimateTokenCount("Hello, world!");
 
 **上下文窗口 = LLM 单次能处理的最大 token 数**。
 
-**2026 年主流模型的上下文窗口**：
+**2026 年主流模型的上下文窗口**（数据来源：各厂商 2026-06 官方文档）：
 
-| 模型 | 上下文窗口 |
-|---|---|
-| DeepSeek V3.2 | **128K** |
-| DeepSeek V4 Flash | 128K |
-| GPT-5.4 | 128K |
-| Claude Opus 4.6 | **200K** |
-| Gemini 2.5 Pro | **2M** |
-| Llama 4 | 128K |
+| 模型 | 上下文窗口 | 备注 |
+|---|---|---|
+| DeepSeek V4 Pro | **1M** | V3.2 已弃用，2026 主力是 V4 系列 |
+| DeepSeek V4 Flash | **1M** | 速度优化版，2026 主力 |
+| GPT-5.5 | **1M** | OpenAI 2026 旗舰 |
+| GPT-5.4 | **1M** | 性价比版（GPT-5.4 mini = 400K） |
+| Claude Opus 4.8 | **1M** | Anthropic 2026 旗舰（Opus 4.6/4.7 同样 1M） |
+| Claude Sonnet 4.6 | **1M** | 速度/智能平衡 |
+| Claude Haiku 4.5 | **200K** | 轻量 |
+| Gemini 2.5 Pro | **1M** | （2M 是 1.5 Pro 时代的旧数据） |
+| Llama 4 Scout | **10M** | 超长上下文开源旗舰 |
+| Llama 4 Maverick | **1M** | 多模态强 |
+| Kimi K2 | **256K** | 国产长文本代表 |
 
 **为什么上下文重要？**
 
@@ -169,7 +174,7 @@ String prompt = """
 
 **加分项**：
 - 提到 **Lost-in-the-Middle 现象**——长上下文中部的信息容易被忽略（Liu et al. 2023）
-- 提到 **Anthropic 1M context 上下文衰减**——200K 后准确率下降
+- 提到 **Anthropic 1M context 上下文衰减**——1M 满载后准确率下降（200K+ 明显）
 - 提到 **RAG 替代长上下文**——不是上下文越长越好
 
 **Java 视角**：
@@ -180,7 +185,7 @@ ChatResponse response = chatClient.prompt()
     .options(ChatOptions.builder()
         .model("gpt-5.4")
         .maxTokens(4096)         // 控制输出
-        // 模型最大 128K 输入
+        // 模型最大 1M 输入（2026 主流 1M 是常态）
         .build())
     .call()
     .chatResponse();
@@ -188,7 +193,7 @@ ChatResponse response = chatClient.prompt()
 // 检查是否超限
 Usage usage = response.getMetadata().getUsage();
 int totalTokens = usage.getTotalTokens();
-if (totalTokens > 120_000) {  // 留 8K 给输出
+if (totalTokens > 950_000) {  // 1M 留 50K 给输出 + 安全余量
     throw new ContextWindowExceededException(...);
 }
 ```

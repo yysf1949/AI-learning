@@ -692,7 +692,7 @@ app:
   name: 销售助手
   mode: advanced-chat  # 工作流模式
   model_config:
-    provider: langgenius/deepseek/deepseek-chat
+    provider: langgenius/deepseek/deepseek-v4-flash
     parameters:
       temperature: 0.7
   workflow:
@@ -704,7 +704,7 @@ app:
         type: question-classifier
         data:
           model:
-            provider: langgenius/deepseek/deepseek-chat
+            provider: langgenius/deepseek/deepseek-v4-flash
           categories:
             - name: 售前
               description: 客户询问产品功能、价格

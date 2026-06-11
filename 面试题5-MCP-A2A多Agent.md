@@ -1217,8 +1217,8 @@ Multi-Agent (3 个)：5-20 次 LLM 调用（5-20x 成本）
 ```java
 // Supervisor 用旗舰
 // Worker 用便宜
-Supervisor → GPT-5.4（复杂决策）
-Worker → DeepSeek V3.2（简单执行）
+Supervisor → GPT-5.4（复杂决策，1M 上下文）
+Worker → DeepSeek V4（简单执行，1M 上下文）
 ```
 
 #### 3. 批量执行

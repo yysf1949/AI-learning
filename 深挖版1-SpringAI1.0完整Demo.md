@@ -16,7 +16,7 @@
 2. **ChatClient 流式 API** — 用过 WebClient / RestTemplate 的你，会觉得非常亲切。
 3. **Advisor 机制** — 这是企业级最关键的能力，类比 Spring 的 Filter 链，每个 Advisor 是一个拦截器（RAG、对话记忆、安全审计、Token 限流……全用它做）。
 4. **MCP 官方支持** — Model Context Protocol 是 2025-2026 年事实标准的"Agent 工具协议"，Spring AI 1.0 原生集成。
-5. **DeepSeek V4 官方支持** — 国产模型这块儿 Spring AI 没落下。
+5. **DeepSeek V4 官方支持**（V4-Flash / V4-Pro 双模型，1M 上下文）— 国产模型这块儿 Spring AI 没落下。
 
 **一句话总结**：以前你写 Java Agent 要拼凑 LangChain4j + 自研封装 + 各种 hack，现在直接用 Spring AI 就是 2026 年 Java 圈做 Agent 的"官方指定答案"。
 
@@ -125,7 +125,7 @@ spring:
       api-key: ${DEEPSEEK_API_KEY}  # 你的 API Key
       chat:
         options:
-          model: deepseek-chat  # 或 deepseek-reasoner（推理模型）
+          model: deepseek-v4-flash  # 或 deepseek-v4-pro（推理模型）
           temperature: 0.7
 
   # 如果用 OpenAI 协议的其他模型（比如通义、智谱）
@@ -135,7 +135,7 @@ spring:
       base-url: https://api.deepseek.com  # DeepSeek 的 OpenAI 兼容地址
       chat:
         options:
-          model: deepseek-chat
+          model: deepseek-v4-flash
 
 server:
   port: 8080
@@ -480,7 +480,7 @@ spring:
       api-key: ${DEEPSEEK_API_KEY}
       chat:
         options:
-          model: deepseek-chat
+          model: deepseek-v4-flash
     # Embedding 模型（如果模型平台提供，否则用专门的 Embedding 服务）
     # 这里演示用通义 DashScope 的 Embedding（中文效果好）
     # 如果你只用 DeepSeek，没有 Embedding 接口，可以选 BGE / M3E 自己部署

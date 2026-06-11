@@ -1349,7 +1349,7 @@ public class LlmObservabilityAdvisor implements BaseAdvisor {
             Map.of(
                 "user_id", UserContext.get().userId(),
                 "tenant_id", UserContext.get().tenantId(),
-                "model", "deepseek-chat"
+                "model", "deepseek-v4-flash"
             )
         );
         return request;
